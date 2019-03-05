@@ -12,30 +12,14 @@ public class Weapon : Collidable
     public int weaponLevel = 0;
     public SpriteRenderer spriteRenderer;
 
-    // Swing
-    private Animator anim;
-    private float cooldown = 0.5f;
-    private float lastSwing;
-
     protected override void Start()
     {
         base.Start();
-        anim = GetComponent<Animator>();
     }
 
     protected override void Update()
     {
         base.Update();
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-
-            if (Time.time - lastSwing > cooldown)
-            {
-                lastSwing = Time.time;
-                Swing();
-            }
-        }
     }
 
     protected override void OnCollide(Collider2D coll)
@@ -58,11 +42,6 @@ public class Weapon : Collidable
             coll.SendMessage("ReceiveDamage", dmg);
 
         }
-    }
-    private void Swing()
-    {
-        anim.SetTrigger("Swing");
-
     }
 
     public void UpgradeWeapon()
